@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="node_modules/web3/dist/web3.min.js"></script>
+    <script async defer>
+        if (typeof window.ethereum !== 'undefined') {
+            console.log("got ethereum/metamask, get query")
+            getInfo()
+        } else {
+            window.alert("please install metamask")
+        }
+        async function getInfo() {
+            console.log("get current wallet info...")
+            const web3 = new Web3(window.ethereum)
+            const netId = await web3.eth.net.getId()
+            console.log("connected net id=", netId)
+            web3.eth.requestAccounts().then(console.log)
+            const accounts = await web3.eth.requestAccounts()
+            console.log(accounts[0])
+            const balance = await web3.eth.getBalance(accounts[0])
+            console.log("balance=", balance)
+        }
+    </script>
+</head>
+
+<body>
+    <h1>minimal web3 local server setup123</h1>
+</body>
+
+</html>
